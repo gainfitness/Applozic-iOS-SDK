@@ -123,26 +123,26 @@ static CGFloat const sendTextViewCornerRadius = 15.0f;
 -(void)setUpTheming
 {
     
-    UIBarButtonItem * barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self setCustomBackButton]];
-    UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                                    target:self action:@selector(refreshTable:)];
-    
+  //  UIBarButtonItem * barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self setCustomBackButton]];
+//    UIBarButtonItem * refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+//                                                                                    target:self action:@selector(refreshTable:)];
+//    
     self.callButton = [[UIBarButtonItem alloc] initWithCustomView:[self customCallButtonView]];
     self.closeButton = [[UIBarButtonItem alloc] initWithCustomView:[self customCloseButtonView]];
 
     
     if(self.individualLaunch)
     {
-        [self.navigationItem setLeftBarButtonItem:barButtonItem];
+    //    [self.navigationItem setLeftBarButtonItem:barButtonItem];
     }
     
     self.navRightBarButtonItems = [NSMutableArray new];
     
 
-    if(![ALApplozicSettings isRefreshButtonHidden])
-    {
-        [self.navRightBarButtonItems addObject:refreshButton];
-    }
+//    if(![ALApplozicSettings isRefreshButtonHidden])
+//    {
+//        [self.navRightBarButtonItems addObject:refreshButton];
+//    }
     
     if([ALApplozicSettings getCustomNavigationControllerClassName])
     {
@@ -157,7 +157,7 @@ static CGFloat const sendTextViewCornerRadius = 15.0f;
        }
        
     }
-    self.navigationItem.rightBarButtonItems = [self.navRightBarButtonItems mutableCopy];
+  //  self.navigationItem.rightBarButtonItems = [self.navRightBarButtonItems mutableCopy];
     
     self.label = [[UILabel alloc] init];
     self.label.backgroundColor = [UIColor clearColor];
@@ -173,26 +173,7 @@ static CGFloat const sendTextViewCornerRadius = 15.0f;
     self.typingLabel.textColor = [ALApplozicSettings getTextColorForTypingLabel];
     [self.typingLabel setFont:[UIFont fontWithName:[ALApplozicSettings getFontFace] size:TYPING_LABEL_SIZE]];
     self.typingLabel.textAlignment = NSTextAlignmentLeft;
-//    [self.view addSubview:self.typingLabel];
-    
-//    CGFloat navigationHeight = self.navigationController.navigationBar.frame.size.height +
-//    [UIApplication sharedApplication].statusBarFrame.size.height;
-    
-//    self.noConversationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height/2) - navigationHeight,
-//                                                                         self.view.frame.size.width, 30)];
-//    self.noConversationLabel.backgroundColor = [UIColor clearColor];
-//    self.noConversationLabel.textColor = [UIColor blackColor];
-//    self.noConversationLabel.text = @"You have no conversations";
-//    [self.noConversationLabel setFont:[UIFont fontWithName:[ALApplozicSettings getFontFace] size:18]];
-//    self.noConversationLabel.textAlignment = NSTextAlignmentCenter;
-//    [self.view addSubview:self.noConversationLabel];o
-    
-//    [self.view insertSubview:self.noConversationLabel belowSubview:self.typingMessageView];
-    
-    if([ALApplozicSettings isDropShadowInNavigationBarEnabled])
-    {
-        [self dropShadowInNavigationBar];
-    }
+
     
 }
 
@@ -211,16 +192,16 @@ static CGFloat const sendTextViewCornerRadius = 15.0f;
 -(void)postMessage {
     
 }
-
--(void)back:(id)sender {
-    
-    UIViewController *  uiController = [self.navigationController popViewControllerAnimated:YES];
-    if(!uiController ){
-        if(self.individualLaunch){
-            [self  dismissViewControllerAnimated:YES completion:nil];
-        }
-    }
-}
+//
+//-(void)back:(id)sender {
+//    
+//    UIViewController *  uiController = [self.navigationController popViewControllerAnimated:YES];
+//    if(!uiController ){
+//        if(self.individualLaunch){
+//            [self  dismissViewControllerAnimated:YES completion:nil];
+//        }
+//    }
+//}
 
 -(void)refreshTable:(id)sender {
     
@@ -237,25 +218,25 @@ static CGFloat const sendTextViewCornerRadius = 15.0f;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSubViews) name:@"APP_ENTER_IN_FOREGROUND" object:nil];
     
-    [self.navigationController.navigationBar setTitleTextAttributes: @{
-                                                                       NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                                       NSFontAttributeName:[UIFont fontWithName:[ALApplozicSettings getFontFace]
-                                                                                                            size:NAVIGATION_TEXT_SIZE]
-                                                                       }];
+//    [self.navigationController.navigationBar setTitleTextAttributes: @{
+//                                                                       NSForegroundColorAttributeName:[UIColor whiteColor],
+//                                                                       NSFontAttributeName:[UIFont fontWithName:[ALApplozicSettings getFontFace]
+//                                                                                                            size:NAVIGATION_TEXT_SIZE]
+//                                                                       }];
     
     if([ALApplozicSettings getColorForNavigation] && [ALApplozicSettings getColorForNavigationItem])
     {
         
-        [self.navigationController.navigationBar setTitleTextAttributes: @{
-                                                                           NSForegroundColorAttributeName:[ALApplozicSettings getColorForNavigationItem],
-                                                                           NSFontAttributeName:[UIFont fontWithName:[ALApplozicSettings getFontFace]
-                                                                                                               size:NAVIGATION_TEXT_SIZE]
-                                                                           }];
+//        [self.navigationController.navigationBar setTitleTextAttributes: @{
+//                                                                           NSForegroundColorAttributeName:[ALApplozicSettings getColorForNavigationItem],
+//                                                                           NSFontAttributeName:[UIFont fontWithName:[ALApplozicSettings getFontFace]
+//                                                                                                               size:NAVIGATION_TEXT_SIZE]
+//                                                                           }];
         self.navigationController.navigationBar.translucent = NO;
         [self.navigationController.navigationBar setBarTintColor:[ALApplozicSettings getColorForNavigation]];
         [self.navigationController.navigationBar setTintColor:[ALApplozicSettings getColorForNavigationItem]];
     
-        [self.navigationController.navigationBar addSubview:[ALUtilityClass setStatusBarStyle]];
+        //[self.navigationController.navigationBar addSubview:[ALUtilityClass setStatusBarStyle]];
         [self.label setTextColor:[ALApplozicSettings getColorForNavigationItem]];
        
     }
@@ -287,7 +268,7 @@ static CGFloat const sendTextViewCornerRadius = 15.0f;
     }
     if([ALUserDefaultsHandler getUserPricingPackage] == CLOSED)
     {
-        [self back:self];
+    //    [self back:self];
         [ALUtilityClass showAlertMessage:@"Please Contact Applozic to activate chat in your app" andTitle:@"ALERT"];
         return;
     }

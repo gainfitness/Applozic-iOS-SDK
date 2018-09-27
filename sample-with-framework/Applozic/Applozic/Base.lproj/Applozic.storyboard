@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nQk-LM-enC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nQk-LM-enC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -218,11 +218,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lrz-ae-7pi">
-                        <barButtonItem key="leftBarButtonItem" title=" &lt; Back  " id="sTB-Ym-PL1" userLabel="backButton">
-                            <connections>
-                                <action selector="backButtonAction:" destination="BYZ-38-t0r" id="vWD-0a-q4j"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="3pR-ud-INa">
                             <connections>
                                 <action selector="navigationRightButtonAction:" destination="BYZ-38-t0r" id="tds-rS-yDu"/>
@@ -230,7 +225,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="backButton" destination="sTB-Ym-PL1" id="gaD-RU-uDt"/>
                         <outlet property="mActivityIndicator" destination="dlR-eX-vMZ" id="iW8-EO-GId"/>
                         <outlet property="mTableView" destination="S0P-A8-QJi" id="faw-jS-ahn"/>
                         <outlet property="navigationRightButton" destination="3pR-ud-INa" id="eZH-B4-U0M"/>

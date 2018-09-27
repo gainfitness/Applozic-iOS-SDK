@@ -11,6 +11,8 @@
 #import "ALConversationProxy.h"
 #import "ALMessage.h"
 
+@protocol GAINALChatViewControllerDelegate;
+
 @protocol ALChatLauncherDelegate <NSObject>
 
 +(void)handleCustomAction:(UIViewController *)chatView andWithMessage:(ALMessage *)alMessage;
@@ -23,21 +25,25 @@
 @property (nonatomic, assign) NSString * applicationId;
 @property (nonatomic, strong) NSNumber * chatLauncherFLAG;
 
--(instancetype)initWithApplicationId:(NSString *) applicationId;
+-(instancetype)initWithApplicationId:(NSString *)applicationId;
 
--(void)launchIndividualChat:(NSString *)userId withGroupId:(NSNumber*)groupID andViewControllerObject:(UIViewController *)viewController andWithText:(NSString *)text;
+-(void)launchIndividualChat:(NSString *)userId withGroupId:(NSNumber*)groupID withDisplayName:(NSString*)displayName andNavControllerObject:(UINavigationController *)navController andWithText:(NSString *)text delegate:(id<GAINALChatViewControllerDelegate>)delegate;
+
+-(void)launchIndividualChat:(NSString *)userId withGroupId:(NSNumber*)groupID andNavControllerObject:(UINavigationController *)viewController andWithText:(NSString *)text;
 
 -(void)launchChatList:(NSString *)title andViewControllerObject:(UIViewController *)viewController;
 
 -(void) launchContactList: (UIViewController *)uiViewController ;
 -(void)registerForNotification;
 
--(void)launchIndividualChat:(NSString *)userId withGroupId:(NSNumber *)groupID withDisplayName:(NSString*)displayName andViewControllerObject:(UIViewController *)viewController andWithText:(NSString *)text;
 
 -(void)launchIndividualContextChat:(ALConversationProxy *)alConversationProxy andViewControllerObject:(UIViewController *)viewController
                    userDisplayName:(NSString *)displayName andWithText:(NSString *)text;
 
 -(void)launchChatListWithUserOrGroup:(NSString *)userId withChannel:(NSNumber*)channelKey andViewControllerObject:(UIViewController *)viewController;
+
+-(void)launchIndividualChat:(NSString *)userId withGroupId:(NSNumber*)groupID
+    andViewControllerObject:(UIViewController *)viewController andWithText:(NSString *)text;
 
 -(void)launchChatListWithCustomNavigationBar:(UIViewController *)viewController;
 

@@ -21,6 +21,14 @@
 #import "ALVCardClass.h"
 #import <ContactsUI/CNContactPickerViewController.h>
 
+@protocol GAINALChatViewControllerDelegate <NSObject>
+
+@optional
+-(void)applozicMessageDidTapTitle:(NSString *)channelKey;
+
+@end
+
+
 @protocol ALChatViewControllerDelegate <NSObject>
 
 @optional
@@ -40,7 +48,8 @@
 @property (nonatomic, strong) NSNumber * conversationId;
 @property (strong, nonatomic) ALMessage * alMessage;
 @property (nonatomic, strong) NSString * contactsGroupId;
-
+@property (nonatomic, strong) NSNumber *scrollStart;
+@property (nonatomic, assign) BOOL isTrainerApp;
 
 @property (nonatomic) BOOL refreshMainView;
 @property (nonatomic) BOOL refresh;
@@ -52,6 +61,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTop2Constraint;
 
 @property (strong, nonatomic) id <ALChatViewControllerDelegate> chatViewDelegate;
+@property (strong, nonatomic) id <GAINALChatViewControllerDelegate> gainChatViewDelegate;
 
 -(void)fetchAndRefresh;
 -(void)fetchAndRefresh:(BOOL)flag;

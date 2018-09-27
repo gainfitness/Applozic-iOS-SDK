@@ -169,7 +169,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Setup quick recording if it's enabled in the settings
     if([ALApplozicSettings isQuickAudioRecordingEnabled]) {
         [self setUpSoundRecordingView];
@@ -187,7 +187,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVOIPMsg)
                                                  name:@"UPDATE_VOIP_MSG" object:nil];
-    
+ 
+    if (self.isTrainerApp) {
+        [self setRightNavButtonCalendarButton];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -208,6 +211,8 @@
         [self handleMessageForward:self.alMessage];
         
     }
+    
+    [self setRightNavButtonCalendarButton];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -362,8 +367,8 @@
         [self.pickerView reloadAllComponents];
     }
     
-     [self checkIfChannelLeft];
-    [self setCallButtonInNavigationBar];
+  //   [self checkIfChannelLeft];
+   // [self setCallButtonInNavigationBar];
     [self checkUserBlockStatus];
     if(self.contactIds ){
       [self checkUserDeleted];
@@ -379,6 +384,8 @@
     [self subscrbingChannel];
     
     [self loadMessagesForOpenChannel];
+    
+    
 }
 
 -(void)setFreezeForAddingRemovingUser:(NSNotification *)notifyObject
@@ -1150,23 +1157,34 @@
 
 -(void)didTapTitleView:(id)sender
 {
-    if(self.contactIds && !self.channelKey)
-    {
-        [self getUserInformation];
-    }
-    else if (![ALApplozicSettings isGroupInfoDisabled] && (self.alChannel.type != GROUP_OF_TWO) && ![ALChannelService isChannelDeleted:self.channelKey] && ![ALChannelService isConversationClosed:self.channelKey])
-    {
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Applozic" bundle:[NSBundle bundleForClass:[self class]]];
-        ALGroupDetailViewController * groupDetailViewController = (ALGroupDetailViewController*)[storyboard instantiateViewControllerWithIdentifier:@"ALGroupDetailViewController"];
-        groupDetailViewController.channelKeyID = self.channelKey;
-        groupDetailViewController.alChatViewController = self;
-        
-        if([ALApplozicSettings isContactsGroupEnabled] && _contactsGroupId){
-            [ALApplozicSettings setContactsGroupId:_contactsGroupId];
-        }
-        
-        [self.navigationController pushViewController:groupDetailViewController animated:YES];
-    }
+    [self.gainChatViewDelegate applozicMessageDidTapTitle:self.alChannel.clientChannelKey];
+    return;
+//
+//#ifdef GAINTRAINER
+//    GHTGroupCreateViewController *groupViewController = [[GHTGroupCreateViewController alloc] initWithGroup:self.group];
+//    groupViewController.group = self.group;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:groupViewController];
+//    [self presentViewController:nav animated:true completion:nil];
+//
+//#else //CLIENT APP
+//    if(self.contactIds && !self.channelKey)
+//    {
+//        [self getUserInformation];
+//    }
+//    else if (![ALApplozicSettings isGroupInfoDisabled] && (self.alChannel.type != GROUP_OF_TWO) && ![ALChannelService isChannelDeleted:self.channelKey] && ![ALChannelService isConversationClosed:self.channelKey])
+//    {
+//        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Applozic" bundle:[NSBundle bundleForClass:[self class]]];
+//        ALGroupDetailViewController * groupDetailViewController = (ALGroupDetailViewController*)[storyboard instantiateViewControllerWithIdentifier:@"ALGroupDetailViewController"];
+//        groupDetailViewController.channelKeyID = self.channelKey;
+//        groupDetailViewController.alChatViewController = self;
+//
+//        if([ALApplozicSettings isContactsGroupEnabled] && _contactsGroupId){
+//            [ALApplozicSettings setContactsGroupId:_contactsGroupId];
+//        }
+//
+//        [self.navigationController pushViewController:groupDetailViewController animated:YES];
+//    }
+//#endif
 }
 
 -(void)fetchMessageFromDB
@@ -2036,6 +2054,7 @@
     UIBarButtonItem *donePickerSelectionButton = [[UIBarButtonItem alloc]
                                                   initWithTitle:NSLocalizedStringWithDefaultValue(@"doneText", [ALApplozicSettings getLocalizableName], [NSBundle mainBundle], @"DONE", @"")
                                                   style:UIBarButtonItemStylePlain
+                          
                                                   target:self action:@selector(donePicking:)];
     
     self.navigationItem.rightBarButtonItem = donePickerSelectionButton;
@@ -2049,6 +2068,19 @@
     
     self.navigationItem.rightBarButtonItem = refreshButton;
 }
+
+-(void)setRightNavButtonCalendarButton
+{
+    UIBarButtonItem *calendar = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(calendarPressed)];
+    calendar.tintColor = [UIColor blueColor];
+    
+    self.navigationItem.rightBarButtonItem = calendar;
+}
+
+-(void)calendarPressed {
+    
+}
+
 
 //==============================================================================================================================================
 #pragma mark - Picker View Done and View Update Methods
@@ -3384,7 +3416,7 @@ style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.startIndex = 0;
     [self fetchMessageFromDB];
     [self loadChatView];
-    [self setCallButtonInNavigationBar];
+ //   [self setCallButtonInNavigationBar];
     [self showNoConversationLabel];
 }
 
@@ -3825,7 +3857,25 @@ style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     {
         [self.loadEarlierAction setHidden:YES];
     }
+    
+    [self closeKeyboardIfNecessary];
 }
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.scrollStart = [NSNumber numberWithFloat:scrollView.contentOffset.y];
+}
+
+- (void)closeKeyboardIfNecessary {
+    
+    if (self.scrollStart != nil && self.scrollStart.floatValue - self.mTableView.contentOffset.y > 70) {
+        [self.view endEditing:true];
+        self.scrollStart = nil;
+    }
+    
+}
+
+
 
 -(void)textViewDidChange:(UITextView *)textView
 {

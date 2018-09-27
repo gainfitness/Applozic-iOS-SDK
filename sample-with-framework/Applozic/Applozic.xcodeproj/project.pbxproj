@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04468CDB208F8385008DFEFA /* AppLozic.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 6D6DF1371BC5364C00EBA00F /* AppLozic.xcdatamodeld */; };
 		048E2F33209A04A300C40B8B /* ALChannelOfTwoMetaData.h in Headers */ = {isa = PBXBuildFile; fileRef = 048E2F31209A04A300C40B8B /* ALChannelOfTwoMetaData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		048E2F34209A04A300C40B8B /* ALChannelOfTwoMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E2F32209A04A300C40B8B /* ALChannelOfTwoMetaData.m */; };
 		105F30C41FFBAEEC00D60431 /* AlChannelFeedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 105F30BE1FFBAEEA00D60431 /* AlChannelFeedResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1657,7 +1656,6 @@
 				TargetAttributes = {
 					6D6DF07C1BC535C800EBA00F = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = C25JNDCBM4;
 						LastSwiftMigration = 0930;
 						ProvisioningStyle = Manual;
 					};
@@ -1686,7 +1684,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04468CDB208F8385008DFEFA /* AppLozic.xcdatamodeld in Resources */,
 				4612E8F31E13882D0022DB23 /* Doxyfile in Resources */,
 				6D7757161D5B83660025560B /* TSMessagesDefaultDesign.json in Resources */,
 				4612E9191E13882D0022DB23 /* MQTTWebsocketTransport in Resources */,
@@ -2005,12 +2002,12 @@
 		6D6DF0861BC535C800EBA00F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C25JNDCBM4;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2025,7 +2022,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.applozic.framework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.applozic.framework.gainfitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2039,12 +2036,12 @@
 		6D6DF0871BC535C800EBA00F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C25JNDCBM4;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2059,7 +2056,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.applozic.framework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.applozic.framework.gainfitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
